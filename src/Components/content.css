@@ -1,0 +1,12 @@
+.ant-card-meta-description .content {
+    display:flex;
+    flex-direction:row;
+}
+
+.ant-card-meta-description .content .anticon {
+    font-size:18px
+}
+.ant-card-meta-description .content p{
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
