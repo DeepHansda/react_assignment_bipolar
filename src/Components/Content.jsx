@@ -14,7 +14,7 @@ import { ProjectContext } from "../App";
 import "./content.css";
 
 function Content({ user }) {
-  const [fillHeart, setFillHeart] = useState(false);
+  const [fillHeart, setFillHeart] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { profiles, setProfiles } = useContext(ProjectContext);
 
