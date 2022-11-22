@@ -1,6 +1,7 @@
 import { SearchOutlined } from "@ant-design/icons";
 import { Button, Col, Input, Layout, Row } from "antd";
 import { Header } from "antd/lib/layout/layout";
+import Title from "antd/lib/typography/Title";
 import React, { useContext, useEffect, useState } from "react";
 import { client, ProjectContext } from "../App";
 import Content from "./Content";
@@ -32,15 +33,17 @@ function Main() {
 
   const handleSearch = () => {
     client
-    .get("/users")
-    .then((response) => {
-      setProfiles(response.data.filter((pro) =>
-      query === "" ? pro : pro.name.toLowerCase().includes(query)
-    ));
-    })
-    .catch((error) => {
-      alert(error);
-    });
+      .get("/users")
+      .then((response) => {
+        setProfiles(
+          response.data.filter((pro) =>
+            query === "" ? pro : pro.name.toLowerCase().includes(query)
+          )
+        );
+      })
+      .catch((error) => {
+        alert(error);
+      });
 
     // setProfiles(
     //   profiles &&
@@ -56,7 +59,7 @@ function Main() {
   };
   return (
     <>
-      <Layout style={{ background:"#fff"}}>
+      <Layout style={{ background: "#fff" }}>
         <Header
           style={{
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
@@ -64,21 +67,21 @@ function Main() {
             alignItems: "center",
             padding: "0 20px",
             backgroundColor: "#f5f5f5",
-            justifyContent:"flex-end"
+            justifyContent: "flex-end",
           }}
         >
-
-
-
-          <div style={{ display: "flex", alignItems: "center",width:`${width > 700 ? '400px' : '100%'}` }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              width: `${width > 700 ? "400px" : "100%"}`,
+            }}
+          >
             <Input
               placeholder="Enter Name."
               value={query}
               onChange={handleInput}
             />
-
-
-
 
             <Button
               type="primary"
@@ -90,21 +93,22 @@ function Main() {
           </div>
         </Header>
 
-
-
-
-
         <div style={{ marginTop: "40px" }}>
-          <Row gutter={[20, 20]} style={{ margin: "10px" }}>
-            {profiles &&
-              profiles.map((user) => {
-                return (
-                  <Col span={`${24 / colCount}`}>
-                    <Content user={user} key={user.id} />
-                  </Col>
-                );
-              })}
-          </Row>
+          {
+            profiles && profiles.length !== 0 ?
+            (<Row gutter={[20, 20]} style={{ margin: "10px" }}>
+              {profiles &&
+                profiles.map((user) => {
+                  return (
+                    <Col span={`${24 / colCount}`}>
+                      <Content user={user} key={user.id} />
+                    </Col>
+                  );
+                })}
+            </Row>):(<div style={{width:"100%", height:"100%",display: "flex" ,alignItems:"center",justifyContent:"center"}}>
+              <Title>Results not found!</Title>
+            </div>)
+          }
         </div>
       </Layout>
     </>
