@@ -14,7 +14,7 @@ import Spinner from "./Components/Spinner";
 
 
 
-const client = axios.create({
+export const client = axios.create({
   baseURL: "https://jsonplaceholder.typicode.com/",
 });
 
